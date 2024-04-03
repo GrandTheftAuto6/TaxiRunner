@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
     private int _passengers = 0;
     public int Passengers { get { return _passengers; } }
 
+    public int money;
+
     private void Awake()
     {
         if (_instance != null && _instance != this)
@@ -24,7 +26,7 @@ public class GameManager : MonoBehaviour
 
     public void AddMoney(int amount)
     {
-        int money = PlayerPrefs.GetInt("Money", 0);
+        money = PlayerPrefs.GetInt("Money", 0);
         money += amount;
         PlayerPrefs.SetInt("Money", money);
     }
@@ -34,6 +36,7 @@ public class GameManager : MonoBehaviour
         int money = PlayerPrefs.GetInt("Money", 0);
         money -= amount;
         PlayerPrefs.SetInt("Money", Mathf.Max(0, money)); // Убедимся, что деньги не могут уйти в минус
+        PassengerManager._moneyCount = money; // Обновляем значение _moneyCount
     }
 
     public void AddPassenger()
@@ -49,7 +52,7 @@ public class GameManager : MonoBehaviour
 
     public int GetMoney()
     {
-        return PlayerPrefs.GetInt("Money", 0);
+        return PlayerPrefs.GetInt("Money", money);
     }
 
     // Другие методы и свойства игрового менеджера могут быть добавлены здесь по необходимости

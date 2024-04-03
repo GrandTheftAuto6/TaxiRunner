@@ -17,16 +17,17 @@ public class PlayerDeathMenu : MonoBehaviour
 
     public void BuyLife()
     {
-        // Проверка наличия достаточного количества денег
-        int requiredMoney = 500;
         int money = GameManager.Instance.GetMoney();
+        int requiredMoney = 500;
         if (money >= requiredMoney)
         {
-            GameManager.Instance.SpendMoney(requiredMoney); // Списываем деньги
+            GameManager.Instance.SpendMoney(requiredMoney);
+            money = GameManager.Instance.GetMoney();
             // Перемещение игрока на 2 метра вперед
             PlayerMove.Instance.MoveForward(4f);
             // Скрытие меню смерти
             gameObject.SetActive(false);
+            PlayerPrefs.SetInt("Money", money);
             Time.timeScale = 1f;
         }
         else
