@@ -3,15 +3,18 @@ using UnityEngine;
 public class PlayerDeath : MonoBehaviour
 {
     [SerializeField] private GameObject _deathMenu;
+    public int moneyAmount;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Barrier"))
         {
+            moneyAmount = PassengerManager._moneyCount;
+            Debug.Log("moneyCount = " + moneyAmount);
+            PlayerPrefs.SetInt("Money", moneyAmount);
             Time.timeScale = 0f;
             _deathMenu.SetActive(true);
             PlayerMove.Instance.Speed = 0f;
-            GameManager.Instance.SaveGameData(); // —охран€ем данные при столкновении с барьером
             GameManager.Instance.ResetPassengersAndSpeed();
         }
     }

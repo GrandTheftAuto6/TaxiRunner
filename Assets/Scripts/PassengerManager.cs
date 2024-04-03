@@ -7,8 +7,10 @@ using System;
 
 public class PassengerManager : MonoBehaviour
 {
+
+
     [SerializeField] int _numberOfPassengersInLevel;
-    [SerializeField] int _moneyCount = 0;
+    public static int _moneyCount = 0;
     [SerializeField] int _moneyPerPassenger;
     [SerializeField] float _speedCount;
     [SerializeField] float _roundedSpeedCount;

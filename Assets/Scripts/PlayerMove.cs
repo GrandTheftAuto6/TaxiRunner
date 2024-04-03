@@ -53,5 +53,6 @@ public class PlayerMove : MonoBehaviour
     public void MoveForward(float distance)
     {
         transform.position += transform.forward * distance;
+        Time.timeScale = 1f;
     }
 }
