@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour
 
     public void SpendMoney(int amount)
     {
-        int money = PlayerPrefs.GetInt("Money", 0);
+        int money = PlayerPrefs.GetInt("Money");
         money -= amount;
         PlayerPrefs.SetInt("Money", Mathf.Max(0, money)); // Убедимся, что деньги не могут уйти в минус
         PassengerManager._moneyCount = money; // Обновляем значение _moneyCount

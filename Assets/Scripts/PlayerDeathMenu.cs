@@ -25,6 +25,7 @@ public class PlayerDeathMenu : MonoBehaviour
             money = GameManager.Instance.GetMoney();
             // Перемещение игрока на 2 метра вперед
             PlayerMove.Instance.MoveForward(4f);
+            PlayerMove.Instance.Speed = 3f;
             // Скрытие меню смерти
             gameObject.SetActive(false);
             PlayerPrefs.SetInt("Money", money);
