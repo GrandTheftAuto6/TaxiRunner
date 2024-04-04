@@ -8,7 +8,7 @@ public class PlayerDeathMenu : MonoBehaviour
 {
     public int money;
 
-    public string sceneName;
+    public string MainMenuSceneName;
 
     public void Restart()
     {
@@ -43,8 +43,8 @@ public class PlayerDeathMenu : MonoBehaviour
     public void LoadMainMenu()
     {
         PassengerManager.instance.RecordPassengersScore();
-        Debug.Log(sceneName);
-        SceneManager.LoadScene("MainMenu");
+        Debug.Log(MainMenuSceneName);
+        SceneManager.LoadScene(MainMenuSceneName);
         Time.timeScale = 1f;
     }
 }
