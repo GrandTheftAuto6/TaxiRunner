@@ -18,7 +18,7 @@ public class PlayerDeathMenu : MonoBehaviour
     public void BuyLife()
     {
         int money = GameManager.Instance.GetMoney();
-        int requiredMoney = 500;
+        int requiredMoney = 20000;
         if (money >= requiredMoney)
         {
             GameManager.Instance.SpendMoney(requiredMoney);
