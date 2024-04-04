@@ -7,7 +7,12 @@ using System;
 
 public class PassengerManager : MonoBehaviour
 {
+    public static PassengerManager instance;
 
+    private void Awake()
+    {
+        instance = this;
+    }
 
     [SerializeField] int _numberOfPassengersInLevel;
     public static int _moneyCount = 0;
@@ -28,5 +33,16 @@ public class PassengerManager : MonoBehaviour
         _passengersText.text = _numberOfPassengersInLevel.ToString();
         _moneyText.text = "$" + _moneyCount.ToString();
         _speedText.text = Mathf.RoundToInt(_roundedSpeedCount * 10).ToString() + " κμ/χ";
+    }
+
+    public void RecordPassengersScore()
+    {
+        int score = _numberOfPassengersInLevel;
+        int bestScore = PlayerPrefs.GetInt("BestScore", 0);
+
+        if (score > bestScore)
+        {
+            PlayerPrefs.SetInt("BestScore", score);
+        }
     }
 }

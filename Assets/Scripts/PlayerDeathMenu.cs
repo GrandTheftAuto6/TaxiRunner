@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Analytics;
 using UnityEngine.SceneManagement;
 
 public class PlayerDeathMenu : MonoBehaviour
 {
     public int money;
+
+    public string sceneName;
 
     public void Restart()
     {
@@ -36,4 +39,13 @@ public class PlayerDeathMenu : MonoBehaviour
             Debug.Log("Not enough money to buy life!");
         }
     }
+
+    public void LoadMainMenu()
+    {
+        PassengerManager.instance.RecordPassengersScore();
+        Debug.Log(sceneName);
+        SceneManager.LoadScene("MainMenu");
+        Time.timeScale = 1f;
+    }
 }
+
