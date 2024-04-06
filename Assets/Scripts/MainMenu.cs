@@ -15,11 +15,13 @@ public class MainMenu : MonoBehaviour
     private void Awake()
     {
         bestMainMenuScore = PlayerPrefs.GetInt("BestScore", 0);
+        PlayerPrefs.Save();
     }
 
     private void Start()
     {
         _bestScoreText.text = "ÐÅÊÎÐÄ: " + bestMainMenuScore.ToString();
+        PlayerPrefs.Save();
     }
 
     public void LoadScene()
