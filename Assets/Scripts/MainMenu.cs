@@ -9,23 +9,21 @@ public class MainMenu : MonoBehaviour
 {
     public string sceneName; // Имя сцены, которую вы хотите загрузить
 
-    public int bestMainMenuScore;
-    [SerializeField] TextMeshProUGUI _bestScoreText;
+    //public int bestMainMenuScore;
+    //[SerializeField] TextMeshProUGUI _bestScoreText;
 
     private void Awake()
     {
-        bestMainMenuScore = PlayerPrefs.GetInt("BestScore", 0);
-        PlayerPrefs.Save();
+        //bestMainMenuScore = PlayerPrefs.GetInt("BestScore", 0);
     }
 
     private void Start()
     {
-        _bestScoreText.text = "РЕКОРД: " + bestMainMenuScore.ToString();
-        PlayerPrefs.Save();
+        //_bestScoreText.text = "РЕКОРД: " + bestMainMenuScore.ToString();
     }
 
     public void LoadScene()
-    {
+    {       
         SceneManager.LoadScene(sceneName);
         Time.timeScale = 1f;
     }

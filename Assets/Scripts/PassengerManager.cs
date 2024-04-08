@@ -43,6 +43,7 @@ public class PassengerManager : MonoBehaviour
         if (score > bestScore)
         {
             PlayerPrefs.SetInt("BestScore", score);
+            PlayerPrefs.Save();
         }
     }
 }
