@@ -14,13 +14,14 @@ public class YandexPlugin : MonoBehaviour
             Destroy(gameObject);
         }
         else
-        {
+        { 
             _instance = this;
         }
     }
 
 
     private int passengersBestScore;
+    private int moneyAmount;
 
     private void Start()
     {
@@ -40,13 +41,17 @@ public class YandexPlugin : MonoBehaviour
     public void LoadData()
     {
         passengersBestScore = YandexGame.savesData.passengersBestScoreDataSave;
+        moneyAmount = YandexGame.savesData.moneyDataSave;
         Debug.Log(passengersBestScore);
     }
 
     public void SaveData()
     {
         passengersBestScore = PlayerPrefs.GetInt("BestScore");
+        moneyAmount = PlayerPrefs.GetInt("Money");
+
         YandexGame.savesData.passengersBestScoreDataSave = passengersBestScore;
+        YandexGame.savesData.moneyDataSave = moneyAmount;
         YandexGame.SaveProgress();
         AddNewLiderboard();
     }

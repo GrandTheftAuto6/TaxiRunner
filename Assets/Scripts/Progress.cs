@@ -1,53 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using TMPro;
 using UnityEngine;
-
-[System.Serializable]
-public class PlayerInfo
-{
-    public int Money;
-}
+using YG;
 
 public class Progress : MonoBehaviour
 {
-    public PlayerInfo PlayerInfo;
-
-    [DllImport("__Internal")]
-    private static extern void SaveExtern(string date);
-
-    [DllImport("__Internal")]
-    private static extern void LoadExtern();
-
-    //[SerializeField] TextMeshProUGUI _playerInfoText;
-
-
     public static Progress Instance;
+    public int moneyAmount;
 
     private void Awake()
     {
-        if (Instance == null)
-        {
-            transform.parent = null;
-            DontDestroyOnLoad(gameObject);
-            Instance = this;
-            LoadExtern();
-        } else
+        if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
         }
-    }
+        else
+        {
+            Instance = this;
+        }
 
-    public void Save()
-    {
-        string jsonString = JsonUtility.ToJson(PlayerInfo);
-        SaveExtern(jsonString);
-    }
-
-    public void SetPlayerInfo(string value)
-    {
-        PlayerInfo = JsonUtility.FromJson<PlayerInfo>(value);
-        //_playerInfoText.text = PlayerInfo.Money.ToString();
+        YandexPlugin._instance.LoadData();
     }
 }

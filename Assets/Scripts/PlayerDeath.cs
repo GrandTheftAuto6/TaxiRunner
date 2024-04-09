@@ -13,9 +13,8 @@ public class PlayerDeath : MonoBehaviour
             moneyAmount = PassengerManager._moneyCount;
             Debug.Log("moneyCount = " + moneyAmount);
             PlayerPrefs.SetInt("Money", moneyAmount);
-            Progress.Instance.PlayerInfo.Money = moneyAmount;
 
-            Progress.Instance.Save();
+            YandexPlugin._instance.SaveData();
 
             Time.timeScale = 0f;
             _deathMenu.SetActive(true);
