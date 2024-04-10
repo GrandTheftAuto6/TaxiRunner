@@ -11,6 +11,7 @@ public class PassengerManager : MonoBehaviour
     public static PassengerManager instance;
 
     public int moneyAmount;
+
     [SerializeField] int _numberOfPassengersInLevel;
     public static int _moneyCount = 0;
     [SerializeField] int _moneyPerPassenger;
@@ -21,14 +22,19 @@ public class PassengerManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI _speedText;
 
 
+    public static int moneyInPassengerManager;
+
+
     private void Awake()
     {
+        moneyInPassengerManager = PlayerDeathMenu.instance.money;
         instance = this;
-        _moneyCount = YandexGame.savesData.moneyDataSave;
+        _moneyCount = moneyInPassengerManager;
         Debug.Log("PASSANGERMANAGER AWAKE: йнк-бн лнмер = " + _moneyCount);
     }
 
-    
+
+
 
     public void AddOne()
     {

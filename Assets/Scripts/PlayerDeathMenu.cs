@@ -7,15 +7,34 @@ using YG;
 
 public class PlayerDeathMenu : MonoBehaviour
 {
+    public static PlayerDeathMenu instance;
+
+
     public int money;
 
     public string MainMenuSceneName;
+
+
+
+    private void Awake()
+    {
+        if (instance != null && instance != this)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            instance = this;
+        }
+    }
+
 
     public void Restart()
     {
         Debug.Log("4. Заново");
         money = YandexGame.savesData.moneyDataSave;
         Debug.Log("5. Кол-во денег после нажатия кнопки Заново = " + money);
+
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         Time.timeScale = 1f;
         PlayerMove.Instance.Speed = 3f;       
