@@ -21,7 +21,7 @@ public class YandexPlugin : MonoBehaviour
 
 
     private int passengersBestScore;
-    private int moneyAmount;
+    public int moneyAmount;
 
     private void Start()
     {
@@ -43,6 +43,7 @@ public class YandexPlugin : MonoBehaviour
         passengersBestScore = YandexGame.savesData.passengersBestScoreDataSave;
         moneyAmount = YandexGame.savesData.moneyDataSave;
         Debug.Log(passengersBestScore);
+        Debug.Log("LoadData вызвался, пассажиров: " + passengersBestScore + ", денег: " + moneyAmount);
     }
 
     public void SaveData()
@@ -52,6 +53,12 @@ public class YandexPlugin : MonoBehaviour
 
         YandexGame.savesData.passengersBestScoreDataSave = passengersBestScore;
         YandexGame.savesData.moneyDataSave = moneyAmount;
+        YandexGame.SaveProgress();
+        AddNewLiderboard();
+    }
+
+    public void JustSaveData()
+    {
         YandexGame.SaveProgress();
         AddNewLiderboard();
     }

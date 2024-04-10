@@ -4,16 +4,13 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using System;
+using YG;
 
 public class PassengerManager : MonoBehaviour
 {
     public static PassengerManager instance;
 
-    private void Awake()
-    {
-        instance = this;
-    }
-
+    public int moneyAmount;
     [SerializeField] int _numberOfPassengersInLevel;
     public static int _moneyCount = 0;
     [SerializeField] int _moneyPerPassenger;
@@ -23,6 +20,16 @@ public class PassengerManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI _moneyText;
     [SerializeField] TextMeshProUGUI _speedText;
 
+
+    private void Awake()
+    {
+        instance = this;
+        _moneyCount = YandexGame.savesData.moneyDataSave;
+        Debug.Log("PASSANGERMANAGER AWAKE: КОЛ-ВО МОНЕТ = " + _moneyCount);
+    }
+
+    
+
     public void AddOne()
     {
         _speedCount = PlayerMove._speed += 0.05f;
@@ -30,7 +37,10 @@ public class PassengerManager : MonoBehaviour
 
         _numberOfPassengersInLevel++;
         _moneyCount += _moneyPerPassenger;
+        Debug.Log("важно PASSANGERMANAGER ADDONE: после добавления пассажира КОЛ-ВО МОНЕТ = " + _moneyCount);
         _passengersText.text = _numberOfPassengersInLevel.ToString();
+        YandexGame.savesData.moneyDataSave = _moneyCount;
+        YandexGame.SaveProgress();
         _moneyText.text = "$" + _moneyCount.ToString();
         _speedText.text = Mathf.RoundToInt(_roundedSpeedCount * 10).ToString() + " км/ч";
     }

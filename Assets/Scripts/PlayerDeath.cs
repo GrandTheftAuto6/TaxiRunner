@@ -1,4 +1,5 @@
 using UnityEngine;
+using YG;
 
 public class PlayerDeath : MonoBehaviour
 {
@@ -9,12 +10,16 @@ public class PlayerDeath : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Barrier"))
         {
+            Debug.Log("1. Игрок умер");
+            moneyAmount = YandexGame.savesData.moneyDataSave;
+            Debug.Log("2. Оно же 12. PlayerDeath: кол-во денег полученое из Gamemanager.GetMoney " + moneyAmount);
             PassengerManager.instance.RecordPassengersScore();
-            moneyAmount = PassengerManager._moneyCount;
-            Debug.Log("moneyCount = " + moneyAmount);
-            PlayerPrefs.SetInt("Money", moneyAmount);
+            Debug.Log("moneyAmount = " + moneyAmount);           
+            YandexGame.savesData.moneyDataSave = moneyAmount;
+            Debug.Log("3. Деньги сохранены в облако в PlayerDeath скрипте. Их - " + moneyAmount);
+            YandexPlugin._instance.JustSaveData();
+            Debug.Log("3. Деньги сохранены в облако в PlayerDeath скрипте. Их - " + moneyAmount);
 
-            YandexPlugin._instance.SaveData();
 
             Time.timeScale = 0f;
             _deathMenu.SetActive(true);

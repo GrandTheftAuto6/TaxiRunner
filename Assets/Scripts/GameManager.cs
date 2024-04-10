@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public int Passengers { get { return _passengers; } }
 
     public int money, moneyAmount;
+    public int moneyFinal;
 
 
     private void Awake()
@@ -25,25 +26,35 @@ public class GameManager : MonoBehaviour
             _instance = this;
         }
 
-        YandexPlugin._instance.LoadData();
+        money = YandexGame.savesData.moneyDataSave;
+        Debug.Log("8. GameManager. Awake Кол-во денег после попадания в Level01 = " + money);
 
-        money = moneyAmount;
     }
 
     public void AddMoney(int amount)
     {
-        money = PlayerPrefs.GetInt("Money", 0);
+        //money = PlayerPrefs.GetInt("Money", 0);
+        money = YandexGame.savesData.moneyDataSave;
+        Debug.Log("9. Подбираю пассажира (GameManager, AddMoney) Кол-во денег после попадания в Level01 = " + money);
         money += amount;
-        PlayerPrefs.SetInt("Money", money);
-        YandexPlugin._instance.SaveData();
+        Debug.Log("10. Подобрал пассажира (GameManager, AddMoney) Кол-во денег после попадания в Level01 = " + money);
+        //PlayerPrefs.SetInt("Money", money);
+        YandexGame.savesData.moneyDataSave = money;
+        moneyFinal = money;
+        Debug.Log("11. Денег в moneyFinal = " + moneyFinal);
+        YandexPlugin._instance.JustSaveData();
     }
 
     public void SpendMoney(int amount)
     {
-        int money = PlayerPrefs.GetInt("Money");
+        //int money = PlayerPrefs.GetInt("Money");
+        money = YandexGame.savesData.moneyDataSave;
         money -= amount;
-        PlayerPrefs.SetInt("Money", Mathf.Max(0, money)); // Убедимся, что деньги не могут уйти в минус
-        PassengerManager._moneyCount = money; // Обновляем значение _moneyCount
+        //PlayerPrefs.SetInt("Money", Mathf.Max(0, money)); // Убедимся, что деньги не могут уйти в минус
+        YandexGame.savesData.moneyDataSave = money;
+        moneyFinal = money;
+        YandexGame.SaveProgress();
+        PassengerManager._moneyCount = money; // Обновляем значение _moneyCount        
     }
 
     public void AddPassenger()
@@ -59,7 +70,9 @@ public class GameManager : MonoBehaviour
 
     public int GetMoney()
     {
-        return PlayerPrefs.GetInt("Money", money);
+        //return PlayerPrefs.GetInt("Money", money);
+        return moneyFinal;
+        Debug.Log("12. GameManager, GetMoney. Кол-во денег в переменной moneyFinal " + moneyFinal);
     }
 
     // Другие методы и свойства игрового менеджера могут быть добавлены здесь по необходимости
